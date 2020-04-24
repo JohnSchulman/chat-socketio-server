@@ -1,4 +1,4 @@
-let express = require('express')
+let express = require('express');
 let app = express();
 
 let http = require('http');
@@ -11,12 +11,22 @@ const port = process.env.PORT || 3000;
 // listenner propre a une serveur websocket
 // detecte la connexion d'un nouvelle utilisateur
 io.on('connection', socket => {
+    io.sockets.rooms.push(socket);
+    socket.emit('client_id', socket.id);
     console.log('user connected');
-
 // detecte l'evenement discussion mais l'evement doit etre la meme pour discussion sur l'autre coté
-    socket.on('discussion', message => {
+
+    // Recoit le message grâce à la fonction "on" de chatService
+    // et puis le renvoi avec la fonction "emit" de chatService
+    // Grâce au channel "broadcast" il est censé le renvoyer à tous
+    socket.on('discussion', ({id, message}) => {
         // console.log(message);
-        io.sockets.emit('broadcast', message);
+        io.sockets.rooms.forEach((v, i) => {
+            if (v.id !== id) {
+                v.emit('broadcast', message);
+            }
+        })
+
     });
 });
 
