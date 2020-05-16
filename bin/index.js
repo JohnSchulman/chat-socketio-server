@@ -1,6 +1,10 @@
 let express = require('express');
 let app = express();
 
+let route1 = require('../routes/index');
+
+app.use('/', route1);
+
 let http = require('http');
 let server = http.Server(app);
 

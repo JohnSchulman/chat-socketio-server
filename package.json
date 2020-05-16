@@ -2,16 +2,21 @@
   "name": "chat-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bin/index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preinstall": "node ./bin/preinstall.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "fake-init": "node modules/sequelize/fake_datas/index.js",
+    "start": "nodemon bin/index.js"
   },
   "dependencies": {
     "nodemon": "^2.0.2",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
-
+    "socket.io": "^2.3.0",
+    "dotenv": "^8.2.0",
+    "sequelize": "^5.21.9",
+    "sequelize-cli": "^5.5.1",
+    "mysql2": "^2.1.0"
   },
   "keywords": [],
   "author": "",
