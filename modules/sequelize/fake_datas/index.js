@@ -3,10 +3,10 @@ const {sequelize} = require("../../sequelize");
 const db = require("../../../models");
 
 const users = [
-    {firstName: 'Nicolas', lastName: 'Choquet', avatar: '', email: 'nchoquet@test.com', password: 'nchoquet'},
-    {firstName: 'Yann', lastName: 'Choquet', avatar: '', email: 'ychoquet@test.com', password: 'ychoquet'},
-    {firstName: 'André', lastName: 'Choquet', avatar: '', email: 'achoquet@test.com', password: 'achoquet'},
-    {firstName: 'Grégory', lastName: 'Choquet', avatar: '', email: 'gchoquet@test.com', password: 'gchoquet'}
+    {firstName: 'John', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'jschulman'},
+    {firstName: 'Barry', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'bschulman'},
+    {firstName: 'Mischa', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'mschulman'},
+    {firstName: 'Joseph', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'joschulman'}
 ];
 
 const discussions = [{name: 'Everybody'}];

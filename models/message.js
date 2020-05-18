@@ -76,6 +76,8 @@ module.exports = (sequelize, DataTypes) => {
         };
       }
     }
+    // InnoDB moteur de stockage
+    // encodage particulier de données
   }, {engine: 'InnoDB'});
   Message.associate = function(models) {};
   return Message;

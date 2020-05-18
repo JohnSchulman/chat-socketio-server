@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     // la jointure pour chercher les discussion de chaque user
     // virtual properties
     MyDiscussions: {
-      // propriété pas stocker dans un table
+      // propriété pas stocker dans un table du BDD nouveau
       type: DataTypes.VIRTUAL,
       async get() {
         // tu te recupère toutes te models
@@ -29,10 +29,12 @@ module.exports = (sequelize, DataTypes) => {
           if(messages.length > 0) {
             for(let message of messages) {
               const author = await message.Author;
+              // ??? thisd.id viens d'ou
+              // si l'id de l'auteur est bien l'id en parmaetre j'enregistre messaage dans myMessagesForThisDiscussion
               if (author.id === this.id) myMessagesForThisDiscussion.push(message);
             }
           }
-          // je les mets dans mon tableau myMessagesForThisDiscussion
+          // si myMessagesForThisDiscussion est pas vide je met discussion dans le tableau myDiscussions
           if(myMessagesForThisDiscussion.length > 0) myDiscussions.push(discussion);
         }
         return myDiscussions;
@@ -67,6 +69,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
+    // InnoDB moteur de stockage
+    // encodage particulier de données
   }, {engine: 'InnoDB'});
   User.associate = function(models) {};
   return User;

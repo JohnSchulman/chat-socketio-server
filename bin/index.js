@@ -1,9 +1,19 @@
 let express = require('express');
 let app = express();
+const bodyParser = require('body-parser');
 
-let route1 = require('../routes/index');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use('/', route1);
+let userRoute = require('../routes/api/users');
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+app.use('/user', userRoute);
 
 let http = require('http');
 let server = http.Server(app);
