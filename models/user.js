@@ -29,8 +29,8 @@ module.exports = (sequelize, DataTypes) => {
           if(messages.length > 0) {
             for(let message of messages) {
               const author = await message.Author;
-              // ??? thisd.id viens d'ou
               // si l'id de l'auteur est bien l'id en parmaetre j'enregistre messaage dans myMessagesForThisDiscussion
+              // tu compare l'auteur du message avec l'id du BDD
               if (author.id === this.id) myMessagesForThisDiscussion.push(message);
             }
           }

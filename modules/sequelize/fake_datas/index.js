@@ -4,9 +4,9 @@ const db = require("../../../models");
 
 const users = [
     {firstName: 'John', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'jschulman'},
-    {firstName: 'Barry', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'bschulman'},
-    {firstName: 'Mischa', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'mschulman'},
-    {firstName: 'Joseph', lastName: 'Schulman', avatar: '', email: 'jschulman@test.com', password: 'joschulman'}
+    {firstName: 'Barry', lastName: 'Schulman', avatar: '', email: 'bschulman@test.com', password: 'bschulman'},
+    {firstName: 'Mischa', lastName: 'Schulman', avatar: '', email: 'mschulman@test.com', password: 'mschulman'},
+    {firstName: 'Joseph', lastName: 'Schulman', avatar: '', email: 'joschulman@test.com', password: 'joschulman'}
 ];
 
 const discussions = [{name: 'Everybody'}];
