@@ -1,5 +1,5 @@
 // page qui exporte les models dans un seul module
-// gnérér automoatiquement
+// gnérér automoatiquement quand tu gener un seul model
 
 'use strict';
 

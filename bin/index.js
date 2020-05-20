@@ -1,6 +1,8 @@
 let express = require('express');
 let app = express();
 const bodyParser = require('body-parser');
+let {sequelize} = require('../modules/sequelize');
+let db = require('../models');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -25,6 +27,7 @@ const port = process.env.PORT || 3000;
 // listenner propre a une serveur websocket
 // detecte la connexion d'un nouvelle utilisateur
 io.on('connection', socket => {
+
     // but ici c'est verifier que socket.id n'est pas deja dans le tableau
     // première partie c'est que tu grace a map selectionne une partie de l'ancien tableau
     // si il trouve un id du socket du socket il renvoie la position --- 1, 2, 3
@@ -41,7 +44,19 @@ io.on('connection', socket => {
     // et puis le renvoi avec la fonction "emit" deatService
     // Grâce au channel "broadcast" il est censé le renvoyer à tous
     socket.on('discussion', message => {
-        socket.broadcast.emit('broadcast', message);
+        // avant de broadcaster le message je l'enregistre
+            let jsonMessage = JSON.parse(message);
+            sequelize.authenticate().then(() => {
+                return db.Message.create({
+                    text: jsonMessage.message,
+                    author: jsonMessage.userId,
+                    discussion: 1
+                });
+            }).then(() => {
+                socket.broadcast.emit('broadcast', message);
+            }).catch(e => {
+                socket.emit('error', e);
+            });
     });
 });
 
