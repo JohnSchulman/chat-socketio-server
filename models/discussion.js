@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   const Discussion = sequelize.define('Discussion', {
     name: DataTypes.STRING,
     // virtual properties
+    // propriété pas stocker dans un table du BDD nouveau
     Messages: {
       type: DataTypes.VIRTUAL,
 
@@ -18,9 +19,6 @@ module.exports = (sequelize, DataTypes) => {
           // je creer une variable temporaire
           let messageToAdd = null;
           if(_messages.length > 0)
-            // on boucle dans l'objet courant
-            // forof recupère lo'bjet courant
-            // forin recupère l'index
             for(let _message of _messages)
               for(let message of messages)
                 // si l'id de message du return est different de l'id message du tableau

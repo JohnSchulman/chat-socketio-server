@@ -58,11 +58,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     // permet d'aqfficher dans le navigateur les informations
     // toujours en virtuelle
-    // Json c'est un format de notation d'objet javascript
-    // propriete d'objet dynamique
-    // peut mettre un string en dure, un tableau
-    // a partir du moment ou l'on affiche en dure c'est du jaon
-    // si on let des crochet sur la clé on peut affecter un valeur specifique a cette clé
     JSON: {
       type: DataTypes.VIRTUAL,
       async get() {

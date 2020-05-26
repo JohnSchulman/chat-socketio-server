@@ -27,21 +27,11 @@ const port = process.env.PORT || 3000;
 // listenner propre a une serveur websocket
 // detecte la connexion d'un nouvelle utilisateur
 io.on('connection', socket => {
-
-    // but ici c'est verifier que socket.id n'est pas deja dans le tableau
-    // première partie c'est que tu grace a map selectionne une partie de l'ancien tableau
-    // si il trouve un id du socket du socket il renvoie la position --- 1, 2, 3
-    // s'il ne trouve pas il renvoie -1
-    // map n'est pas persistant donc il est efface juste après au contraire d'un tableau temporaire
-    // if (io.sockets.rooms.map(r => r.id).indexOf(socket.id) === -1) {
-    //     io.sockets.rooms.push(socket);
-    //     socket.emit('client_id', socket.id);
-        console.log('user connected');
-    // }
+     console.log('user connected');
 // detecte l'evenement discussion mais l'evement doit etre la meme pour discussion sur l'autre coté
 
     // Recoit le message grâce à la fonction "on" de chatService
-    // et puis le renvoi avec la fonction "emit" deatService
+    // et puis le renvoi avec la fonction "emit" chatService
     // Grâce au channel "broadcast" il est censé le renvoyer à tous
     socket.on('discussion', message => {
         // avant de broadcaster le message je l'enregistre

@@ -8,9 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     avatar: DataTypes.STRING,
     // la jointure pour chercher les discussion de chaque user
-    // virtual properties
     MyDiscussions: {
-      // propriété pas stocker dans un table du BDD nouveau
       type: DataTypes.VIRTUAL,
       async get() {
         // tu te recupère toutes te models
@@ -54,15 +52,10 @@ module.exports = (sequelize, DataTypes) => {
           last_name: this.last_name,
           avatar: this.avatar,
           email: this.email,
-          // map permet de boucler sur un tableau et renvoyer un nouveau
-          // tableau avec le resultat retourné par mon callback
-          // seul contraint les deux tableau doit avoir la meme taille
-
           // les tableau les id des discussions de l'utilisateur
           // pour eviter le reference circulaire c'est à dire une discussion appel des messages qui appellent des users qui appellent des discussion ...
           // On a un tableau mydiscussion et puis
           // on creer une deuxième tableau grace a map qui renvoit juste un tableau des id de mydiscussion
-
           my_discussions: (await this.MyDiscussions).map(d => d.id),
           createdAt: this.createdAt,
           updatedAt: this.updatedAt

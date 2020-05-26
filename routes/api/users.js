@@ -5,7 +5,6 @@ let db = require('../../models');
 
 /* GET home page. */
 router.get('/logout', function (req, res) {
-    //delete req.localStorage.setItem(user);
   let user =  req.localStorage.setItem('user', JSON.stringify(user));
   localStorage.removeItem(user);
     let status;
@@ -80,32 +79,3 @@ router.get('/register', function (req, res) {
     });
 });
         module.exports = router;
-/*
-sequelize.authenticate().then(() => {
-    for(let user of users)
-        db.User.create({first_name: user.firstName, last_name: user.lastName, avatar: user.avatar, email: user.email, password: user.password})
-            .then(async user => {
-                console.log(`L'utilisateur '${user.first_name} ${user.last_name}' à été créé !!`);
-                let _user = await user.JSON;
-                let message = messages.reduce((acc, m) => {
-                    // je retourne si la condition est vrai le message courant sinon le accumlateur == le derneier message enregistré
-                    return m.author === _user.id ? m : acc;
-                });
-
-                return db.Message.create({
-                    text: message.text.replace('%name%', user.first_name),
-                    author: message.author,
-                    discussion: message.discussion
-                })
-            }).then(async message => {
-            let _discussion = await message.Discussion;
-            let discussion = null;
-            if (_discussion) {
-                discussion = await _discussion.JSON;
-            }
-            if (discussion) {
-                console.log(`Le message '${message.text}' à été créé dans la discussion '${discussion.name}'`)
-            }
-        });
-}).catch(err => console.log(err));*/
-

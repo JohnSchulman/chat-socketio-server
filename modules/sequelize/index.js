@@ -15,15 +15,4 @@ if(credentials) {
     throw 'Veuillez insérer des crédentials pour la connection en base de données !!';
 }
 
-/***************************************************************************/
-/********************** DB for private chat real time **********************/
-/***************************************************************************/
-/*        message        --        discussion        --        user        */
-/***************************************************************************/
-/*          id           --            id            --         id         */
-/*         text          --           name           --     first_name     */
-/*      discussion       --         createAt         --      last_name     */
-/*       createAt        --                          --       avatar       */
-/*        author         --                          --      createAt      */
-/***************************************************************************/
 
