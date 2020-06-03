@@ -69,4 +69,23 @@ sequelize.authenticate().then(() => {
             }
         );
     }
-});*/
+});
+
+   console.log('user connected');
+    sequelize.authenticate().then(() => {
+  //      for(let discussion of discussions()) {
+            db.Discussion.findOne({where: {id: discussion.name}}).then(discussion => {
+                    if (discussion) {
+                        db.Discussion.get({
+                            name: messages.discussion,
+                        }).then(message =>
+                            console.log(`La liste de discussion '${message.Discussion.name}' à été créé'`)
+                        )
+                    }
+                }
+            );
+        }
+    });
+
+
+*/
