@@ -3,21 +3,6 @@ var router = express.Router();
 let {sequelize} = require('../../modules/sequelize');
 let db = require('../../models');
 
-/* GET home page. */
-router.get('/logout', function (req, res) {
-  let user =  req.localStorage.setItem('user', JSON.stringify(user));
-  localStorage.removeItem(user);
-    let status;
-    if(user === undefined) {
-        status = true;
-    } else {
-        status = false;
-    }
-    res.json({
-        status: status
-    })
-});
-
 router.get('/login', function (req, res) {
     // requette sql pour récupérer dans la table users, le user qui cherche à s'identifier
     sequelize.authenticate().then(() => {
@@ -47,7 +32,16 @@ router.get('/login', function (req, res) {
 });
 
 router.get('/register', function (req, res) {
-    sequelize.authenticate().then(() => {
+    sequelize.authenticate().then(async () => {
+        return await db.User.findOne({ where: { email: req.query.email } }) ? true : false;
+    }).then(userFinded => {
+        if (userFinded) {
+            res.json({
+                error: true,
+                message: 'Cet email est déjà utilisé !!'
+            });
+        }
+
         req.query.avatar = '';
         return db.User.create({
             first_name: req.query.first_name,
@@ -78,4 +72,5 @@ router.get('/register', function (req, res) {
         });
     });
 });
-        module.exports = router;
+
+module.exports = router;

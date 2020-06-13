@@ -3,16 +3,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Discussion = sequelize.define('Discussion', {
     name: DataTypes.STRING,
-    // virtual properties
-    // propriété pas stocker dans un table du BDD nouveau
     Messages: {
       type: DataTypes.VIRTUAL,
-
       async get() {
-        // requette ou on recupère toutes les messages de la bdd en fonction de l'id de la discussion
         return await (require('../models').Message.findAll({where: {discussion: this.id}}));
       },
-      // on peut ajouter des message dans la discussion
       set(messages) {
         // toutes le return ce met automatiquement dans la liste _messages
         this.Messages.then(_messages => {
