@@ -31,7 +31,7 @@ router.get('/login', function (req, res) {
     });
 });
 
-router.get('/register', function (req, res) {
+router.get('/register', function (req, res, next) {
     sequelize.authenticate().then(async () => {
         return await db.User.findOne({ where: { email: req.query.email } }) ? true : false;
     }).then(userFinded => {
@@ -40,6 +40,7 @@ router.get('/register', function (req, res) {
                 error: true,
                 message: 'Cet email est déjà utilisé !!'
             });
+            next();
         }
 
         req.query.avatar = '';
